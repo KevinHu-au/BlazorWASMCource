@@ -23,7 +23,7 @@ else
                     </a>
                     <p>@product.Description</p>
                     <h5 class="price">
-                        @* $@product.Price *@
+                        @GetPriceText(product)
                     </h5>
                 </div>
             </li>
@@ -36,6 +36,21 @@ else
     protected override async void OnInitialized()
     {
         ProductService.OnProductsChanged += StateHasChanged;
+    }
+
+    private string GetPriceText(Product product)
+    {
+        var variants = product.Variants;
+
+        if (variants == null || variants.Count == 0)
+            return string.Empty;
+
+        if (variants.Count == 1)
+        {
+            return $"${variants[0].Price}";
+        }
+
+        return $"Starting at ${variants.Min(v => v.Price)}";
     }
 
     public void Dispose()
