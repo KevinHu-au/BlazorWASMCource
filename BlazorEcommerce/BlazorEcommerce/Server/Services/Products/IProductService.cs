@@ -4,5 +4,6 @@
     {
         Task<ServiceResponse<List<Product>>> GetAllProducts();
         Task<ServiceResponse<Product>> GetProduct(int productId);
+        Task<ServiceResponse<List<Product>>> GetProducts(string categoryUrl);
     }
 }
