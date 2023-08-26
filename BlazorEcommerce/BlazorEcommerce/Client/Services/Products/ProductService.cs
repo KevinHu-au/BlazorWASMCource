@@ -20,7 +20,7 @@ namespace BlazorEcommerce.Client.Services.Products
             return response;
         }
 
-        public async Task GetProducts()
+        public async Task LoadAllProducts()
         {
             var products = await _httpClient.GetFromJsonAsync<List<Product>>("api/Products");
             if (products != null) 

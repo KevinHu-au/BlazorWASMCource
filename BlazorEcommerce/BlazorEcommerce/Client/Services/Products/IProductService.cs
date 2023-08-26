@@ -3,7 +3,7 @@
     public interface IProductService
     {
         List<Product> Products { get; }
-        Task GetProducts();
+        Task LoadAllProducts();
         Task<ServiceResponse<Product>> GetProduct(int id);
     }
 }

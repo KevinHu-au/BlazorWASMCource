@@ -2,7 +2,7 @@
 {
     public interface IProductService
     {
-        Task<ServiceResponse<List<Product>>> GetProducts();
+        Task<ServiceResponse<List<Product>>> GetAllProducts();
         Task<ServiceResponse<Product>> GetProduct(int productId);
     }
 }
