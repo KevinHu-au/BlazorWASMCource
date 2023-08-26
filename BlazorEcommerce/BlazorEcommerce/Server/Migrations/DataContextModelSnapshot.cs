@@ -407,7 +407,7 @@ namespace BlazorEcommerce.Server.Migrations
             modelBuilder.Entity("BlazorEcommerce.Shared.ProductVariant", b =>
                 {
                     b.HasOne("BlazorEcommerce.Shared.Product", "Product")
-                        .WithMany("ProductVariants")
+                        .WithMany("Variants")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -425,7 +425,7 @@ namespace BlazorEcommerce.Server.Migrations
 
             modelBuilder.Entity("BlazorEcommerce.Shared.Product", b =>
                 {
-                    b.Navigation("ProductVariants");
+                    b.Navigation("Variants");
                 });
 #pragma warning restore 612, 618
         }

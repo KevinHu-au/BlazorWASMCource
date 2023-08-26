@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorEcommerce.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230826095442_UpdateProductWithVariantsList")]
-    partial class UpdateProductWithVariantsList
+    [Migration("20230826100043_RefactorProductModel")]
+    partial class RefactorProductModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
