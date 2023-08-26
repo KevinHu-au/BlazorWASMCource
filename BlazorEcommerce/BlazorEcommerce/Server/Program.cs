@@ -3,7 +3,7 @@ global using BlazorEcommerce.Server.Data;
 global using BlazorEcommerce.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using BlazorEcommerce.Server.Services.Products;
-using BlazorEcommerce.Client.Services.Categories;
+global using BlazorEcommerce.Server.Services.Categories;
 
 var builder = WebApplication.CreateBuilder(args);
 
