@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorEcommerce.Server.Controllers
 {
@@ -33,6 +32,20 @@ namespace BlazorEcommerce.Server.Controllers
         {
             var products = (await _productService.GetProducts(categoryUrl)).Data;
             return Ok(products);
+        }
+
+        [HttpGet("search/{searchText}")]
+        public async Task<ActionResult<List<Product>>> SearchProducts(string searchText)
+        {
+            var products = (await _productService.SearchProducts(searchText)).Data;
+            return Ok(products);
+        }
+
+        [HttpGet("searchsuggestions/{searchText}")]
+        public async Task<ActionResult<List<string>>> GetProductSearchSuggestions(string searchText)
+        {
+            var suggestions = (await _productService.GetProductSearchSuggestions(searchText)).Data;
+            return Ok(suggestions);
         }
     }
 }

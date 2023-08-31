@@ -51,5 +51,51 @@
 
             return response;
         }
+
+        public async Task<ServiceResponse<List<Product>>> SearchProducts(string searchText)
+        {
+            List<Product> products = await GetProductsWithSearchText(searchText);
+
+            return new ServiceResponse<List<Product>> { Data = products };
+        }
+
+        public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
+        {
+            var result = new List<string>();
+            List<Product> products  = await GetProductsWithSearchText(searchText);
+
+            foreach (var product in products)
+            {
+                if (product.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.Add(product.Title);
+                }
+
+                if (product.Description.IsNullOrEmpty())
+                {
+                    continue; 
+                }
+
+                var punctuations = product.Description.Where(c => char.IsPunctuation(c)).Distinct().ToArray();
+
+                var words = product.Description.Split().Select(w => w.Trim(punctuations));
+                foreach (var word in words) 
+                {
+                    if (!result.Contains(word))
+                    {
+                        result.Add(word); 
+                    }
+                }
+            }
+
+            return new ServiceResponse<List<string>> { Data = result };
+        }
+        private async Task<List<Product>> GetProductsWithSearchText(string searchText)
+        {
+            return await _context.Products
+                .Where(p => (p.Title != null && p.Title.ToLower().Contains(searchText.ToLower())) ||
+                            (p.Description != null && p.Description.ToLower().Contains(searchText.ToLower())))
+                .ToListAsync();
+        }
     }
 }
